@@ -6,5 +6,5 @@ Proyecto realizado para el ciclo 4 del programa de formación Misión TIC 2022 r
 |Jefry Nicolas Chicaiza Carrasquilla  |    ✅   |
 |Óscar Darío Patermina                |       |
 |Joan Sebastián Ruiz Ariza            |  ✅   |
-|Angélica Maria Gómez Castro          |       |
+|Angélica Maria Gómez Castro          |  ✅   |
 |Diego Cano Zuleta                    |       |
