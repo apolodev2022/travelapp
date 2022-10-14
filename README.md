@@ -4,7 +4,7 @@ Proyecto realizado para el ciclo 4 del programa de formación Misión TIC 2022 r
 |            Estudiante               | Commit  |
 |:-----------------------------------:|---------|
 |Jefry Nicolas Chicaiza Carrasquilla  |    ✅   |
-|Óscar Darío Patermina                |       |
+|Oscar Darío Patermina Lora             |       |
 |Joan Sebastián Ruiz Ariza            |  ✅   |
 |Angélica Maria Gómez Castro          |  ✅   |
 |Diego Cano Zuleta                    |       |
