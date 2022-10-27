@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:travelapp/pages/home_page.dart';
 import 'package:travelapp/pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,10 +24,11 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: Center(
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        margin: const EdgeInsets.all(30),
+        child: const Center(
           child: Image(image: AssetImage('assets/images/Logo.png')),
         ),
       ),

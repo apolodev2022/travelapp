@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:travelapp/models/User.dart';
 import 'package:travelapp/pages/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -19,15 +21,37 @@ class _SigninPageState extends State<SigninPage> {
 
   void _onRegisterButtonClicked() {
     setState(() {
-      data = "Nombre: ${_name.text} \nEmail: ${_email.text}";
+      if (_password.text == _repPassword.text) {
+        var user = User(_name.text, _email.text, _password.text);
+        saveUser(user);
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginPage()));
+      } else {
+        _showMsg(context, 'Las constraseñás deben de ser iguales');
+      }
     });
+  }
+
+  void _showMsg(BuildContext context, String msg) {
+    final Scaffold = ScaffoldMessenger.of(context);
+    Scaffold.showSnackBar(
+      SnackBar(
+          content: Text(msg),
+          action: SnackBarAction(
+              label: 'Aceptar', onPressed: Scaffold.hideCurrentSnackBar)),
+    );
+  }
+
+  void saveUser(User user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", jsonEncode(user));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        body: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             child: Center(
               child: SingleChildScrollView(
                   child: Column(
@@ -35,7 +59,6 @@ class _SigninPageState extends State<SigninPage> {
                 children: <Widget>[
                   const Image(
                     image: AssetImage('assets/images/Logo.png'),
-                    height: 300,
                   ),
                   const SizedBox(
                     height: 16.0,
