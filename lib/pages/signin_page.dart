@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/models/User.dart';
+import 'package:travelapp/models/user.dart';
 import 'package:travelapp/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';

@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:travelapp/pages/home_page.dart';
 import 'package:travelapp/pages/login_page.dart';
+import 'package:travelapp/pages/place_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -37,11 +39,20 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _closeSplash() async {
     Future.delayed(const Duration(seconds: 2), () async {
-      Navigator.of(context).push(PageTransition(
-        type: PageTransitionType.fade,
-        duration: Duration(milliseconds: 2000),
-        child: LoginPage(),
-      ));
+      var currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        Navigator.of(context).pushReplacement(PageTransition(
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 2000),
+          child: const LoginPage(),
+        ));
+      } else {
+        Navigator.of(context).pushReplacement(PageTransition(
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 2000),
+          child: const PlacePage(),
+        ));
+      }
     });
   }
 }
