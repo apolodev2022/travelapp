@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelapp/models/User.dart';
 import 'package:travelapp/pages/home_page.dart';
 import 'package:travelapp/pages/signin_page.dart';
+import 'package:travelapp/repository/firebase_api.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseApi _firebaseApi = FirebaseApi();
+
   final _email = TextEditingController();
   final _password = TextEditingController();
 
@@ -21,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    getUser();
+    // getUser();
     super.initState();
   }
 
@@ -31,19 +34,35 @@ class _LoginPageState extends State<LoginPage> {
     userLoad = User.fromJson(userMap);
   }
 
-  void _validateUser() {
-    if (_email.text == userLoad.email && _password.text == userLoad.password) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+  void _showMsg(BuildContext context, String msg) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        action: SnackBarAction(
+            label: 'Aceptar', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+  void _validateUser() async {
+    if (_email.text.isEmpty || _password.text.isEmpty) {
+      _showMsg(context, "Debe ingresar el correo y la contraseña");
     } else {
-      final scaffold = ScaffoldMessenger.of(context);
-      scaffold.showSnackBar(
-        SnackBar(
-          content: const Text("Correo o contraseña incorrecta"),
-          action: SnackBarAction(
-              label: 'Aceptar', onPressed: scaffold.hideCurrentSnackBar),
-        ),
-      );
+      var result = await _firebaseApi.loginUser(_email.text, _password.text);
+      String msg = "";
+      if (result == "invalid-email") {
+        msg = "El correo electrónico está mal escrito";
+      } else if (result == "wrong-password") {
+        msg = "Correo o contraseña incorrectos";
+      } else if (result == "network-required-failed") {
+        msg = "Revise su conexión a Internet";
+      } else {
+        // msg = "Bienvenido";
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+      _showMsg(context, msg);
     }
   }
 

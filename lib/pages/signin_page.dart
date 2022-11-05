@@ -4,6 +4,8 @@ import 'package:travelapp/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import 'package:travelapp/repository/firebase_api.dart';
+
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
 
@@ -12,6 +14,8 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+  final FirebaseApi _firebaseApi = FirebaseApi();
+
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -23,11 +27,13 @@ class _SigninPageState extends State<SigninPage> {
     setState(() {
       if (_password.text == _repPassword.text) {
         var user = User(_name.text, _email.text, _password.text);
+        print('Se va a guardar');
         saveUser(user);
+        print('guardado?');
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const LoginPage()));
       } else {
-        _showMsg(context, 'Las constraseñás deben de ser iguales');
+        _showMsg(context, 'Las contraseñas deben de ser iguales');
       }
     });
   }
@@ -43,8 +49,23 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   void saveUser(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", jsonEncode(user));
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString("user", jsonEncode(user));
+    var result = await _firebaseApi.registerUser(user.email, user.password);
+    String msg = '';
+    if (result == "invalid-email") {
+      msg = "El correo electrónico está mal escrito";
+    } else if (result == "weak-password") {
+      msg = "La contraseña debe tener mínimo 6 dígitos";
+    } else if (result == "email-already-in-use") {
+      msg = "Ya existe una cuenta con ese correo electrónico";
+    } else if (result == "network-required-failed") {
+      msg = "Revise su conexión a Internet";
+    } else {
+      msg = "Usuario registrado con éxito";
+    }
+    _showMsg(context, msg);
+    print('El registro es: ' + result.toString());
   }
 
   @override
