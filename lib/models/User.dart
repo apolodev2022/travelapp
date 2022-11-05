@@ -1,23 +1,18 @@
 class User {
+  var _uid;
   var _name;
   var _email;
   var _password;
 
-  get password => _password;
-
-  set password(value) {
-    _password = value;
-  }
+  User(this._uid, this._name, this._email, this._password);
 
   User.Empty();
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': _password,
-      };
+  get uid => _uid;
 
-  User.fromJson(Map<String, dynamic> json) : _name = json['name'], _email = json['email'], _password = json['password'];
+  set uid(value) {
+    _uid = value;
+  }
 
   get name => _name;
 
@@ -27,5 +22,26 @@ class User {
 
   get email => _email;
 
-  User(this._name, this._email, this._password);
+  set email(value) {
+    _email = value;
+  }
+
+  get password => _password;
+
+  set password(value) {
+    _password = value;
+  }
+
+  Map<String, dynamic> toJson() => {
+        'uid': uid,
+        'name': name,
+        'email': email,
+        'password': password,
+      };
+
+  User.fromJson(Map<String, dynamic> json)
+      : _uid = json['uid'],
+        _name = json['name'],
+        _email = json['email'],
+        _password = json['password'];
 }

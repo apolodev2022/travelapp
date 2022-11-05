@@ -26,12 +26,8 @@ class _SigninPageState extends State<SigninPage> {
   void _onRegisterButtonClicked() {
     setState(() {
       if (_password.text == _repPassword.text) {
-        var user = User(_name.text, _email.text, _password.text);
-        print('Se va a guardar');
-        saveUser(user);
-        print('guardado?');
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginPage()));
+        var user = User("", _name.text, _email.text, _password.text);
+        _registerUser(user);
       } else {
         _showMsg(context, 'Las contraseñas deben de ser iguales');
       }
@@ -48,7 +44,13 @@ class _SigninPageState extends State<SigninPage> {
     );
   }
 
-  void saveUser(User user) async {
+  void _saveUser(User user) async {
+    var result = await _firebaseApi.createUser(user);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
+  void _registerUser(User user) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setString("user", jsonEncode(user));
     var result = await _firebaseApi.registerUser(user.email, user.password);
@@ -61,11 +63,14 @@ class _SigninPageState extends State<SigninPage> {
       msg = "Ya existe una cuenta con ese correo electrónico";
     } else if (result == "network-required-failed") {
       msg = "Revise su conexión a Internet";
+    } else if (result == "unknown") {
+      msg = "Debe completar todos los campos";
     } else {
       msg = "Usuario registrado con éxito";
+      user.uid = result;
+      _saveUser(user);
     }
     _showMsg(context, msg);
-    print('El registro es: ' + result.toString());
   }
 
   @override

@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:travelapp/models/User.dart' as UserApp;
 
 class FirebaseApi {
   // Lógica de Registro de Usuarios
@@ -27,6 +29,17 @@ class FirebaseApi {
       return e.code;
     } on FirebaseException catch (e) {
       print('FirebaseException ${e.code}');
+      return e.code;
+    }
+  }
+
+  Future<String> createUser(UserApp.User user) async {
+    try {
+      final document =
+          await FirebaseFirestore.instance.collection("users").doc(user.uid).set(user.toJson());
+      return user.uid;
+    } on FirebaseException catch (e) {
+      print("FirebaseException ${e.code}");
       return e.code;
     }
   }
