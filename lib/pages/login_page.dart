@@ -59,10 +59,8 @@ class _LoginPageState extends State<LoginPage> {
         msg = "Revise su conexión a Internet";
       } else {
         msg = "Bienvenido";
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const PlacePage()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const PlacePage()));
       }
       _showMsg(context, msg);
     }
@@ -117,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontStyle: FontStyle.italic,
                     color: Colors.blue)),
             onPressed: () {
-              Navigator.of(context).push(_createRoute());
+              Navigator.of(context).pushReplacement(_createRoute());
             },
             child: const Text('Registrarse'),
           ),
