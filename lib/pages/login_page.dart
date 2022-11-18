@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelapp/models/user.dart';
+import 'package:travelapp/pages/home_page.dart';
 import 'package:travelapp/pages/place_page.dart';
 import 'package:travelapp/pages/signin_page.dart';
 import 'package:travelapp/repository/firebase_api.dart';
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         msg = "Bienvenido";
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const PlacePage()));
+            MaterialPageRoute(builder: (context) => const HomePage()));
       }
       _showMsg(context, msg);
     }

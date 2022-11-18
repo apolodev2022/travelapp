@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:travelapp/pages/detail_page.dart';
 import 'package:travelapp/pages/home_page.dart';
 import 'package:travelapp/pages/login_page.dart';
 import 'package:travelapp/pages/place_page.dart';
@@ -50,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.of(context).pushReplacement(PageTransition(
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 2000),
-          child: const PlacePage(),
+          child: const HomePage(),
         ));
       }
     });
