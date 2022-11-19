@@ -74,8 +74,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(FontAwesomeIcons.searchengin, size: 20),
               label: 'Buscar'),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.heart, size: 20),
-              label: 'Favoritos'),
+              icon: Icon(FontAwesomeIcons.heart, size: 20), label: 'Favoritos'),
         ],
         currentIndex: currentPage,
         onTap: (page) {

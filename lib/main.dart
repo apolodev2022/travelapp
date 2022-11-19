@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:travelapp/models/local_place.dart';
-import 'package:travelapp/pages/detail_page.dart';
+import 'package:travelapp/pages/home_page.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:travelapp/pages/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DetailPage(),
+      home: const HomePage(),
     );
   }
 }

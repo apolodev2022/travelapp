@@ -14,7 +14,7 @@ class LocalPlace extends HiveObject {
   String? city;
 
   @HiveField(3)
-  String? description;
+  String? type;
 
   @HiveField(4)
   String? imageLink;

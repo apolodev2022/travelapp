@@ -20,7 +20,7 @@ class LocalPlaceAdapter extends TypeAdapter<LocalPlace> {
       ..id = fields[0] as String?
       ..name = fields[1] as String?
       ..city = fields[2] as String?
-      ..description = fields[3] as String?
+      ..type = fields[3] as String?
       ..imageLink = fields[4] as String?;
   }
 
@@ -35,7 +35,7 @@ class LocalPlaceAdapter extends TypeAdapter<LocalPlace> {
       ..writeByte(2)
       ..write(obj.city)
       ..writeByte(3)
-      ..write(obj.description)
+      ..write(obj.type)
       ..writeByte(4)
       ..write(obj.imageLink);
   }
