@@ -17,28 +17,6 @@ class _PlacePageState extends State<PlacePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sitios turísticos"),
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-              const PopupMenuItem(
-                  value: Menu.logOut, child: Text('Cerrar sesión'))
-            ],
-            onSelected: (Menu item) {
-              setState(() {
-                if (item == Menu.logOut) {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
-                }
-              });
-            },
-          )
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
         child: StreamBuilder<QuerySnapshot>(
