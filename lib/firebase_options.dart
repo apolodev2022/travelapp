@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1000254646038',
     projectId: 'travelapp-91461',
     storageBucket: 'travelapp-91461.appspot.com',
-    iosClientId: '1000254646038-i94j5mmpnh3tarclj9661r9cja4j4kvj.apps.googleusercontent.com',
+    iosClientId:
+        '1000254646038-i94j5mmpnh3tarclj9661r9cja4j4kvj.apps.googleusercontent.com',
     iosBundleId: 'com.example.travelapp',
   );
 }

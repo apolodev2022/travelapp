@@ -21,7 +21,7 @@ class _NewPlacePageState extends State<NewPlacePage> {
   final _description = TextEditingController();
 
   double _rating = 3.0;
-  
+
   void _showMsg(BuildContext context, String msg) {
     final Scaffold = ScaffoldMessenger.of(context);
     Scaffold.showSnackBar(
