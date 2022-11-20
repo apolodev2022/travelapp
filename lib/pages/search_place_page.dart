@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelapp/models/place.dart';
 import 'package:travelapp/models/result.dart';
 import 'package:travelapp/pages/detail_search_place_page.dart';
 import 'package:travelapp/repository/places_api.dart';
