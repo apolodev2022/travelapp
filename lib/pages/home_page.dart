@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travelapp/pages/favorites_page.dart';
 import 'package:travelapp/pages/login_page.dart';
 import 'package:travelapp/pages/place_page.dart';
+import 'package:travelapp/pages/places_store_page.dart';
 import 'package:travelapp/pages/search_place_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     pages.add(PlacePage());
     pages.add(SearchPlacePage());
     pages.add(FavoritesPage());
+    pages.add(PlacesStorePage());
   }
 
   void _onItemTapped(int page) {
@@ -40,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mis Lugares"),
+        title: const Text("TravelApp"),
         actions: [
           PopupMenuButton(
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
@@ -66,6 +68,11 @@ class _HomePageState extends State<HomePage> {
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPage,
+        type: BottomNavigationBarType.fixed,
+        onTap: (page) {
+          _onItemTapped(page);
+        },
         items: const [
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.locationArrow, size: 20),
@@ -75,11 +82,9 @@ class _HomePageState extends State<HomePage> {
               label: 'Buscar'),
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.heart, size: 20), label: 'Favoritos'),
+          BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.locationDot, size: 20), label: 'Recomendados'),
         ],
-        currentIndex: currentPage,
-        onTap: (page) {
-          _onItemTapped(page);
-        },
       ),
     );
   }

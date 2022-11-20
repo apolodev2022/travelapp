@@ -30,9 +30,6 @@ class _SearchPlacePageState extends State<SearchPlacePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Google Place API"),
-        ),
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: Center(
